@@ -1,23 +1,27 @@
 import { Route, Routes, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-import AboutUs from "../pages/AboutUs";
-import Contact from "../pages/Contact";
 import Header from "../ui/Header";
-import CommunityImpactSection from "./../pages/CommunityEvents";
-import FlagshipProgramsSection from "./../pages/FlagShipProg";
-import HomeSection from "./../pages/Home";
-import OurTeam from "./../pages/OurTeam";
-import PastEvents from "./../pages/PastEvent";
-import PlanOfAction from "./../pages/PlanOfAction";
-import SignatureEventsSection from "./../pages/SignatureEvents";
-import WeeklyCadenceSection from "./../pages/WeeklyCadence";
-import WorkshopsSection from "./../pages/WorkShop";
-import Footer from "./../ui/Footer";
-import Navigation from "./../ui/Navigation";
+import Footer from "../ui/Footer";
+import Navigation from "../ui/Navigation";
 import sections from "./RouteLinkSession";
+import { pagesSchema } from "../data/pagesSchema";
+import PollPopup from "../components/PollPopup";
 
 function AppLayout() {
   const location = useLocation();
+  const [showPoll, setShowPoll] = useState(true);
+  const [pollCompleted, setPollCompleted] = useState(false);
+
+  // Reset poll check when navigating to home page
+  useEffect(() => {
+    if (location.pathname === "/") {
+      const hasSeenPoll = sessionStorage.getItem("pollShownThisSession");
+      if (!hasSeenPoll) {
+        setShowPoll(true);
+      }
+    }
+  }, [location.pathname]);
 
   const getCurrentPage = () => {
     const path = location.pathname;
@@ -25,33 +29,25 @@ function AppLayout() {
     return section ? section.id : "home";
   };
 
+  const handlePollComplete = () => {
+    setShowPoll(false);
+    setPollCompleted(true);
+    sessionStorage.setItem("pollShownThisSession", "true");
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      {/* Show poll popup only on home page and if not completed */}
+      {showPoll && location.pathname === "/" && <PollPopup onComplete={handlePollComplete} />}
+      
       <Header />
       <Navigation sections={sections} currentPage={getCurrentPage()} />
 
       <main>
         <Routes>
-          <Route path="/" element={<HomeSection />} />
-          <Route path="/past-events" element={<PastEvents />} />
-          <Route path="/our-team" element={<OurTeam />} />
-          <Route path="/plan-of-action" element={<PlanOfAction />} />
-          <Route
-            path="/flagship-programs"
-            element={<FlagshipProgramsSection />}
-          />
-          <Route path="/workshops" element={<WorkshopsSection />} />
-          <Route path="/weekly-cadence" element={<WeeklyCadenceSection />} />
-          <Route
-            path="/signature-events"
-            element={<SignatureEventsSection />}
-          />
-          <Route
-            path="/community-impact"
-            element={<CommunityImpactSection />}
-          />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<AboutUs />} />
+          {pagesSchema.map(({ path, component: Component }, idx) => (
+            <Route key={path} path={path} element={<Component />} />
+          ))}
         </Routes>
       </main>
 
