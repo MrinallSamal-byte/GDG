@@ -1,14 +1,21 @@
 import express from 'express';
+import { createServer } from 'http';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+import { initializeSocket } from './services/socketService.js';
 
 dotenv.config();
 
 const app = express();
+const httpServer = createServer(app);
 const PORT = process.env.PORT || 5000;
+
+// Initialize Socket.IO
+initializeSocket(httpServer);
 
 // Middleware
 app.use(cors({
@@ -20,6 +27,7 @@ app.use(cookieParser());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {
@@ -42,9 +50,10 @@ const connectDB = async () => {
 
 // Start Server
 connectDB().then(() => {
-  app.listen(PORT, () => {
+  httpServer.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
     console.log(`📍 API available at http://localhost:${PORT}/api`);
+    console.log(`🔌 Socket.IO ready for real-time updates`);
   });
 });
 

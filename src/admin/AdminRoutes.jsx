@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import AdminDashboard from "./AdminDashboard";
+import AdminDashboardEnhanced from "./AdminDashboardEnhanced";
 import AdminSignatureEvents from "./AdminSignatureEvents";
 import AdminPastEvents from "./AdminPastEvents";
 import AdminOurTeam from "./AdminOurTeam";
@@ -12,6 +13,10 @@ import AdminPolls from "./AdminPolls";
 import AdminLogin from "./AdminLogin";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminNav from "./AdminNav";
+import AdminEvents from "./AdminEvents";
+import AdminTeamManagement from "./AdminTeamManagement";
+import AdminNotices from "./AdminNotices";
+import AdminPlanOfActionManager from "./AdminPlanOfActionManager";
 
 const AdminRoutes = () => (
   <Routes>
@@ -108,6 +113,58 @@ const AdminRoutes = () => (
           <div className="min-h-screen bg-gray-50">
             <AdminNav />
             <AdminPolls />
+          </div>
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/dashboard-enhanced"
+      element={
+        <ProtectedRoute requireAdmin={true}>
+          <AdminDashboardEnhanced />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/events"
+      element={
+        <ProtectedRoute requireAdmin={true}>
+          <div className="min-h-screen bg-gray-50">
+            <AdminNav />
+            <AdminEvents />
+          </div>
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/team-management"
+      element={
+        <ProtectedRoute requireAdmin={true}>
+          <div className="min-h-screen bg-gray-50">
+            <AdminNav />
+            <AdminTeamManagement />
+          </div>
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/notices"
+      element={
+        <ProtectedRoute requireAdmin={true}>
+          <div className="min-h-screen bg-gray-50">
+            <AdminNav />
+            <AdminNotices />
+          </div>
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/plan-of-action-manager"
+      element={
+        <ProtectedRoute requireAdmin={true}>
+          <div className="min-h-screen bg-gray-50">
+            <AdminNav />
+            <AdminPlanOfActionManager />
           </div>
         </ProtectedRoute>
       }

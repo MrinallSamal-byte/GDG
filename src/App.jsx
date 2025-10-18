@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./admin/ProtectedRoute";
+import NotificationProvider from "./components/NotificationProvider";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       <GlobalStyles />
       <Router>
         <AuthProvider>
-          <Routes>
+          <NotificationProvider>
+            <Routes>
             {/* Authentication Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
@@ -35,6 +37,7 @@ function App() {
             {/* Public Routes */}
             <Route path="/*" element={<AppLayout />} />
           </Routes>
+          </NotificationProvider>
         </AuthProvider>
       </Router>
     </>
