@@ -1,38 +1,40 @@
 {
-  "name": "gdgweb",
+  "name": "gdg-iter-website",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Full-stack web application for GDG ITER with separated frontend and backend",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "dev:server": "cd server && npm run dev",
-    "dev:all": "concurrently \"npm run dev\" \"npm run dev:server\"",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "install:all": "cd frontend && npm install && cd ../backend && npm install",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "start:backend": "cd backend && npm start",
+    "setup": "npm run setup:backend && npm run setup:frontend",
+    "setup:backend": "cd backend && npm run setup",
+    "setup:frontend": "cd frontend && cp .env.example .env",
+    "create-admin": "cd backend && npm run create-admin",
+    "quick-setup": "cd backend && npm run quick-setup",
+    "lint": "cd frontend && npm run lint",
+    "preview": "cd frontend && npm run preview"
   },
-  "dependencies": {
-    "firebase": "^12.4.0",
-    "framer-motion": "^12.23.24",
-    "lottie-react": "^2.4.1",
-    "lucide-react": "^0.546.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-router-dom": "^7.9.4",
-    "styled-components": "^6.1.19"
-  },
+  "keywords": [
+    "gdg",
+    "react",
+    "nodejs",
+    "express",
+    "mongodb",
+    "fullstack"
+  ],
+  "author": "Mrinall Samal",
+  "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
-    "@eslint/js": "^9.36.0",
-    "@tailwindcss/vite": "^4.1.14",
-    "@types/react": "^19.1.16",
-    "@types/react-dom": "^19.1.9",
-    "@vitejs/plugin-react": "^5.0.4",
-    "concurrently": "^9.2.1",
-    "eslint": "^9.36.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.22",
-    "globals": "^16.4.0",
-    "tailwindcss": "^4.0.0",
-    "vite": "^7.1.7"
+    "concurrently": "^9.2.1"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
   }
 }
