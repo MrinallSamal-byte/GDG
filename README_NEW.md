@@ -225,9 +225,10 @@ gdg-iter-website/
    
    Edit `backend/.env`:
    ```env
-   MONGODB_URI=mongodb://localhost:27017/gdg-iter
-   # Or for MongoDB Atlas:
-   # MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/gdg-iter
+       MONGODB_URI=mongodb://localhost:27017/gdg-iter
+       # Or for MongoDB Atlas:
+       # MONGODB_URI=mongodb+srv://<your-username>:<your-password>@<your-cluster>.mongodb.net/gdg-iter
+       # WARNING: Never commit real credentials. Always use environment variables and secrets management.
    ```
 
 5. **Initialize database with sample data**
