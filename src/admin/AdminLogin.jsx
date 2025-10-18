@@ -16,10 +16,16 @@ const AdminLogin = () => {
     try {
       setError("");
       setLoading(true);
-      await login(email, password);
-      navigate("/admin");
+      const data = await login(email, password);
+      
+      // Redirect based on role
+      if (data.user.role === 'admin') {
+        navigate("/admin");
+      } else {
+        navigate("/dashboard");
+      }
     } catch (err) {
-      setError("Failed to log in. Please check your credentials.");
+      setError(err.message || "Failed to log in. Please check your credentials.");
       console.error(err);
     }
     

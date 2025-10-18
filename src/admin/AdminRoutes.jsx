@@ -15,19 +15,19 @@ import AdminNav from "./AdminNav";
 
 const AdminRoutes = () => (
   <Routes>
-    <Route path="/admin/login" element={<AdminLogin />} />
+    <Route path="/login" element={<AdminLogin />} />
     <Route
-      path="/admin"
+      path="/"
       element={
-        <ProtectedRoute>
+        <ProtectedRoute requireAdmin={true}>
           <AdminDashboard />
         </ProtectedRoute>
       }
     />
     <Route
-      path="/admin/signature-events"
+      path="/signature-events"
       element={
-        <ProtectedRoute>
+        <ProtectedRoute requireAdmin={true}>
           <div className="min-h-screen bg-gray-50">
             <AdminNav />
             <AdminSignatureEvents />
@@ -36,9 +36,9 @@ const AdminRoutes = () => (
       }
     />
     <Route
-      path="/admin/past-events"
+      path="/past-events"
       element={
-        <ProtectedRoute>
+        <ProtectedRoute requireAdmin={true}>
           <div className="min-h-screen bg-gray-50">
             <AdminNav />
             <AdminPastEvents />
@@ -47,9 +47,9 @@ const AdminRoutes = () => (
       }
     />
     <Route
-      path="/admin/our-team"
+      path="/our-team"
       element={
-        <ProtectedRoute>
+        <ProtectedRoute requireAdmin={true}>
           <div className="min-h-screen bg-gray-50">
             <AdminNav />
             <AdminOurTeam />
@@ -58,9 +58,9 @@ const AdminRoutes = () => (
       }
     />
     <Route
-      path="/admin/plan-of-action"
+      path="/plan-of-action"
       element={
-        <ProtectedRoute>
+        <ProtectedRoute requireAdmin={true}>
           <div className="min-h-screen bg-gray-50">
             <AdminNav />
             <AdminPlanOfAction />
@@ -69,9 +69,9 @@ const AdminRoutes = () => (
       }
     />
     <Route
-      path="/admin/flagship-programs"
+      path="/flagship-programs"
       element={
-        <ProtectedRoute>
+        <ProtectedRoute requireAdmin={true}>
           <div className="min-h-screen bg-gray-50">
             <AdminNav />
             <AdminFlagshipPrograms />
@@ -80,9 +80,9 @@ const AdminRoutes = () => (
       }
     />
     <Route
-      path="/admin/workshops"
+      path="/workshops"
       element={
-        <ProtectedRoute>
+        <ProtectedRoute requireAdmin={true}>
           <div className="min-h-screen bg-gray-50">
             <AdminNav />
             <AdminWorkshops />
@@ -91,9 +91,9 @@ const AdminRoutes = () => (
       }
     />
     <Route
-      path="/admin/weekly-cadences"
+      path="/weekly-cadences"
       element={
-        <ProtectedRoute>
+        <ProtectedRoute requireAdmin={true}>
           <div className="min-h-screen bg-gray-50">
             <AdminNav />
             <AdminWeeklyCadences />
@@ -102,9 +102,9 @@ const AdminRoutes = () => (
       }
     />
     <Route
-      path="/admin/polls"
+      path="/polls"
       element={
-        <ProtectedRoute>
+        <ProtectedRoute requireAdmin={true}>
           <div className="min-h-screen bg-gray-50">
             <AdminNav />
             <AdminPolls />
